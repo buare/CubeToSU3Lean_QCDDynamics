@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>立方體無因次樸素解與 QCD 動力參數解：落差稽核</title>
+  <script>
+    window.MathJax = {
+      tex: {inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']]},
+      svg: {fontCache: 'global'}
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root {
+      --ink:#18313c; --muted:#56707a; --paper:#fbfdfd; --line:#cadcdf;
+      --navy:#173d4f; --cyan:#dff3f6; --green:#e5f5e9; --amber:#fff3d7;
+      --red:#fde9e7; --purple:#eee9f8; --code:#10272f;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#edf4f5;color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75}
+    main{max-width:1120px;margin:0 auto;background:var(--paper);min-height:100vh;box-shadow:0 0 32px #18313c18}
+    header{padding:52px 6vw 38px;background:linear-gradient(135deg,#153b4d,#276476);color:white}
+    header h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.25;margin:0 0 14px}
+    header p{font-size:1.12rem;max-width:880px;margin:0;color:#e8f7f8}
+    nav{position:sticky;top:0;z-index:3;padding:10px 5vw;background:#ffffffee;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow:auto;white-space:nowrap}
+    nav a{color:var(--navy);text-decoration:none;margin-right:20px;font-weight:700}
+    article{padding:28px 6vw 70px}
+    section{scroll-margin-top:72px;margin:38px 0 52px}
+    h2{font-size:1.7rem;color:var(--navy);border-bottom:3px solid #78b5bf;padding-bottom:7px}
+    h3{font-size:1.25rem;color:#28596a;margin-top:30px}
+    .lead{font-size:1.12rem}
+    .verdict{padding:20px 24px;background:var(--cyan);border-left:6px solid #25869a;border-radius:6px;font-size:1.08rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+    .card{padding:18px;border:1px solid var(--line);border-radius:10px;background:white}
+    .card h3{margin:0 0 8px}
+    .green{background:var(--green)} .amber{background:var(--amber)} .red{background:var(--red)} .purple{background:var(--purple)}
+    .tag{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.82rem;font-weight:800;margin-right:6px}
+    .struct{background:#dceff3;color:#15546a}.input{background:#fff0c8;color:#765000}.proved{background:#dff3e4;color:#155c2b}.open{background:#f8dddd;color:#862820}
+    table{width:100%;border-collapse:collapse;margin:16px 0 24px;background:white}
+    th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+    th{background:#eaf3f4;color:#173f50}
+    code,pre{font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace}
+    code{background:#eaf0f1;border-radius:4px;padding:.1em .35em}
+    pre{background:var(--code);color:#dff7f6;padding:16px;overflow:auto;border-radius:8px;line-height:1.5}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch;margin:22px 0}
+    .flow div{padding:14px 10px;text-align:center;border:1px solid var(--line);border-radius:8px;background:white;font-weight:700}
+    .flow div:not(:last-child)::after{content:"→";float:right;transform:translate(20px,0);color:#288295}
+    .note{padding:14px 18px;border:1px solid #d8ba6f;background:#fff9e9;border-radius:7px}
+    .danger{padding:14px 18px;border:1px solid #d9887f;background:#fff1ef;border-radius:7px}
+    .small{font-size:.9rem;color:var(--muted)}
+    .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+    footer{border-top:1px solid var(--line);padding:24px 6vw;color:var(--muted);background:#f4f8f8}
+    @media(max-width:760px){.flow{grid-template-columns:1fr}.flow div:not(:last-child)::after{content:"↓";float:none;display:block;transform:none}.wide{display:block;overflow-x:auto}}
+    @media print{body{background:white}main{box-shadow:none}nav{display:none}section{break-inside:avoid}a{color:inherit}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>立方體無因次樸素解<br>與 QCD 動力參數解</h1>
+    <p>沿 CubeToSU3Lean 10.1／完整工程的群代數層，實際加入 \(g_s\)、協變導數、夸克色—自旋場、場方程殘差與初始／邊界資料，逐項查明：哪些只是校準、哪些真正改變動力、哪些仍然不能由立方體推出。</p>
+  </header>
+
+  <nav>
+    <a href="#verdict">總判決</a><a href="#naive">樸素解</a><a href="#insert">加入動力</a><a href="#gap">落差</a><a href="#data">實驗數據</a><a href="#lean">Lean 新增</a><a href="#boundary">尚未完成</a>
+  </nav>
+
+  <article>
+    <section id="verdict">
+      <h2>一、先給結論</h2>
+      <div class="verdict">
+        <strong>加入物理常數，不會自動把玩具模型變成完整真實物理；但會把它從「無單位的候選代數」推進到「可指定、可求解、可與數據比較的經典場問題」。</strong><br>
+        真正的跨越需要五件事同時到位：物理解釋字典、動力方程、參數校準、初始／邊界資料、可觀測量規則。這次 Lean 已加入中間三項的第一版，並把沒有完成的部分明列出來。
+      </div>
+
+      <div class="flow">
+        <div>立方體／\(D\)</div><div>候選 \(\mathfrak{su}(3)\)</div><div>色群字典</div><div>QCD 動力與參數</div><div>解與可觀測量</div>
+      </div>
+
+      <table class="wide">
+        <thead><tr><th>層級</th><th>現在有什麼</th><th>能說什麼</th><th>不能偷說什麼</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag struct">結構內生</span></td><td>\(D\)、八維實係數、交換子閉合、\(\mathfrak{su}(3)\)、指數進入 \(SU(3)\)</td><td>是一個精確可運算的候選群代數引擎</td><td>八頂點就是八膠子</td></tr>
+          <tr><td><span class="tag input">物理字典</span></td><td><code>ColorFactorPostulate</code></td><td>在假設「此 \(SU(3)\) 是 \(SU(3)_c\)」後可接 QCD</td><td>字典已被立方體證明</td></tr>
+          <tr><td><span class="tag proved">新增動力</span></td><td>\(g_s,D_\mu,F_{\mu\nu}\)、Dirac／Yang–Mills 殘差、初邊值資料型別</td><td>可明確寫出一個經典初邊值問題</td><td>方程由立方體作用量唯一推出</td></tr>
+          <tr><td><span class="tag input">數據校準</span></td><td>\(\alpha_s(M_Z^2)=0.1180\pm0.0009\Rightarrow g_s(M_Z)\)</td><td>量出單位正規化和實際耦合的差</td><td>用一個能標的 \(g_s\) 預測所有能標</td></tr>
+          <tr><td><span class="tag open">尚待完成</span></td><td>變分推導、Minkowski／Clifford、局域規範協變、量子化、重整化、強子化</td><td>誠實標示下一階段</td><td>目前已是完整 QCD</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="naive">
+      <h2>二、無因次樸素解到底給了什麼？</h2>
+      <p class="lead">樸素核心給的是<strong>關係、方向、閉合律與比例</strong>，不是 GeV、秒或截面。</p>
+
+      <h3>2.1 有限核心與八維連續延拓</h3>
+      <p>循環差分矩陣</p>
+      \[
+      D=\begin{pmatrix}0&1&-1\\-1&0&1\\1&-1&0\end{pmatrix}
+      \]
+      <p>被送入反 Hermitian、無跡的 \(3\times3\) 複矩陣空間。Lean 已有線性等價</p>
+      \[
+      \mathbb R^8\simeq_{\mathbb R}\mathfrak{su}(3),
+      \qquad [X,Y]=XY-YX\in\mathfrak{su}(3).
+      \]
+      <p>這裡的「8」是李代數維數。它容許用八個係數描述候選規範方向，但並不單憑數字 8 證明它們是自然界的八個膠子。</p>
+
+      <h3>2.2 樸素 ODE</h3>
+      <p>原專案的連續層有</p>
+      \[
+      \frac{dc}{dt}=\kappa\,\operatorname{ad}_D(c),
+      \qquad \operatorname{ad}_D(c)=[D,c].
+      \]
+      <p>若只看這個齊次方程且 \(\kappa\neq0\)，令 \(\tau=\kappa t\)，便有</p>
+      \[
+      \frac{dc}{d\tau}=\operatorname{ad}_D(c).
+      \]
+      <div class="note"><strong>所以 \(\kappa\) 的功用是校準時鐘。</strong>它可給「一圈需要多少秒／多少逆 GeV」，卻不改變無因次相圖的軌道形狀。Lean 新定理 <code>recover_naiveRHS</code> 機器檢查的就是這個代數核心。</div>
+
+      <h3>2.3 原本 QCD 運動學隱藏的選擇</h3>
+      <p><code>QCDKinematics.lean</code> 原先定義</p>
+      \[
+      F^{(1)}_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu+[A_\mu,A_\nu].
+      \]
+      <p>這並非沒有耦合，而是把交換子係數選成了 <strong>\(g_s=1\) 的單位正規化</strong>。作為純代數測試沒有問題；一旦要和實驗比較，就必須把這個隱藏設定打開。</p>
+    </section>
+
+    <section id="insert">
+      <h2>三、實際加入的動力層</h2>
+
+      <div class="grid">
+        <div class="card green"><h3>顯式強耦合</h3><p>\(g_s\) 不再默認為 1；同一個值同時進入曲率與協變導數。</p></div>
+        <div class="card green"><h3>夸克場</h3><p>\(\psi(x)\) 有 4 個自旋分量與 3 個色分量，成為 12 分量色—自旋場。</p></div>
+        <div class="card green"><h3>聯立殘差</h3><p>加入 Yang–Mills 與 Dirac 方程的零殘差定義，且色流可由夸克場生成。</p></div>
+        <div class="card green"><h3>解的選擇資料</h3><p>加入初始切片及一般邊界區域；同一方程不再被誤當成唯一解。</p></div>
+      </div>
+
+      <h3>3.1 含耦合的場強</h3>
+      <p>採反 Hermitian 生成元慣例：</p>
+      \[
+      \boxed{F^{(g)}_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu+g_s[A_\mu,A_\nu]}.
+      \]
+      <p>若改用粒子物理常見的 Hermitian 生成元，公式會出現 \(i\) 與相應正負號；兩者是慣例翻譯，不是物理矛盾。</p>
+
+      <h3>3.2 協變導數與夸克方程</h3>
+      \[
+      D_\mu\psi=\partial_\mu\psi+g_sA_\mu\psi,
+      \qquad
+      \boxed{(i\gamma^\mu D_\mu-m_q)\psi=0}.
+      \]
+      <p>這裡 \(g_s\) 控制色場作用強度，\(m_q\) 帶入能量尺度，\(\gamma^\mu\) 則屬於時空／Clifford 字典。立方體候選代數只供應色生成元與交換子，沒有自行供應後三者。</p>
+
+      <h3>3.3 Yang–Mills 方程</h3>
+      \[
+      D^\mu F_{\mu\nu}=J_\nu[\psi].
+      \]
+      <p>新版 Lean 把「色流如何由夸克場組成」保留為顯式映射 <code>quarkCurrent : QuarkField → ColorCurrent</code>。這是刻意的：沒有先選定 Dirac 共軛、生成元正規化與時空號誌，就不能假裝電流公式已由有限立方體推出。</p>
+
+      <h3>3.4 QCD 拉氏量的位置</h3>
+      <p>標準物理目標（Hermitian 慣例）是</p>
+      \[
+      \boxed{\mathcal L_{\rm QCD}
+      =\sum_q\bar\psi_q(i\gamma^\mu D_\mu-m_q)\psi_q
+      -\frac14F^A_{\mu\nu}F^{A\mu\nu}}.
+      \]
+      <p>這次程式加入的是<strong>點態 Euclidean 原型密度</strong>，尚未宣稱已完成 Minkowski 時空積分或由變分原理推出方程。因此「拉氏量形式已能擺進資料結構」與「完整作用量定理已證」仍是兩件事。</p>
+
+      <h3>3.5 初始與邊界條件</h3>
+      \[
+      A_\mu|_{t=0}=A_{\mu,0},\qquad
+      \psi|_{t=0}=\psi_0,
+      \]
+      <p>再加指定邊界區域上的場值。場方程決定允許的演化；初始／邊界資料決定其中哪一條解。沒有這些資料，所謂「解出物理數字」沒有唯一答案。</p>
+    </section>
+
+    <section id="gap">
+      <h2>四、無因次解與動力參數解的真正落差</h2>
+      <table class="wide">
+        <thead><tr><th>缺口</th><th>樸素層</th><th>加入後</th><th>能否只靠換單位消除？</th></tr></thead>
+        <tbody>
+          <tr><td>整體演化尺度</td><td>\(\dot c=\operatorname{ad}_D c\)</td><td>\(\dot c=\kappa\operatorname{ad}_D c\)</td><td><strong>可</strong>；\(\tau=\kappa t\)</td></tr>
+          <tr><td>非線性相對強度</td><td>\(F=dA+[A,A]\)</td><td>\(F=dA+g_s[A,A]\)</td><td><strong>不可在固定場正規化下整體消去</strong></td></tr>
+          <tr><td>質量／能量</td><td>沒有 GeV</td><td>\(m_q,\mu,\Lambda_{\rm QCD}\)</td><td>不可；它們設定物理尺度</td></tr>
+          <tr><td>狀態</td><td>任意係數向量</td><td>夸克場、色場、源、初值、邊界值</td><td>不是常數問題，而是問題規格</td></tr>
+          <tr><td>量子可觀測量</td><td>沒有 Born／路徑積分</td><td>尚待量子化、重整化、算符與態</td><td>不可；是另一層理論</td></tr>
+          <tr><td>物理身分</td><td>候選 \(SU(3)\)</td><td>假設為 \(SU(3)_c\)</td><td>不可；這是可受實驗支持或否決的字典</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4.1 Lean 現在證到的精確差式</h3>
+      \[
+      \boxed{F^{(g)}_{\mu\nu}-F^{(1)}_{\mu\nu}
+      =(g_s-1)[A_\mu,A_\nu]}.
+      \]
+      <p>這條式子非常有用，因為它把「落差」定位得毫不含糊：偏差不在外微分項，而在非阿貝爾自作用項。若場彼此對易，交換子為零，兩版在該配置上沒有差；若交換子大，差異就按 \(g_s-1\) 放大。</p>
+
+      <div class="danger"><strong>正規化警告：</strong>可用場重定義把 \(g_s\) 從 \(F\) 搬到整體作用量係數或頂點規則中，所以「\(21.8\%\)」是<strong>固定本專案場正規化</strong>下的交換子係數比較，不是獨立於慣例的散射截面預測。物理耦合不會消失，只會換位置。</div>
+    </section>
+
+    <section id="data">
+      <h2>五、帶入實驗數據後得到什麼？</h2>
+      <p>採用 Particle Data Group 2025 QCD review 的世界平均：</p>
+      \[
+      \alpha_s(M_Z^2)=0.1180\pm0.0009,
+      \qquad \alpha_s=\frac{g_s^2}{4\pi}.
+      \]
+      <p>因此</p>
+      \[
+      g_s(M_Z)=\sqrt{4\pi\alpha_s(M_Z^2)}
+      =1.21772.
+      \]
+      <p>保守地直接換算上下端點：</p>
+
+      <table>
+        <thead><tr><th>輸入</th><th>\(\alpha_s\)</th><th>\(g_s\)</th><th>相對樸素 \(g_s=1\)</th></tr></thead>
+        <tbody>
+          <tr><td>下端</td><td class="num">0.1171</td><td class="num">1.21306</td><td class="num">+21.31%</td></tr>
+          <tr><td>中央</td><td class="num">0.1180</td><td class="num">1.21772</td><td class="num">+21.77%</td></tr>
+          <tr><td>上端</td><td class="num">0.1189</td><td class="num">1.22235</td><td class="num">+22.24%</td></tr>
+        </tbody>
+      </table>
+
+      <p>中央值同時給</p>
+      \[
+      g_s^2=4\pi\alpha_s=1.48283.
+      \]
+      <p>這表示在本專案固定正規化下：</p>
+      <ul>
+        <li>三點非阿貝爾頂點中與 \(g_s\) 成正比的係數，相對單位值高約 \(21.8\%\)；</li>
+        <li>四點頂點中與 \(g_s^2\) 成正比的係數，相對單位值高約 \(48.3\%\)；</li>
+        <li>但完整截面還含運動學、色因子、圖的干涉、高階修正、PDF 與重整化尺度，不能把上述百分比直接叫作事件率預測。</li>
+      </ul>
+
+      <div class="note"><strong>這一步是互動，不是套答案：</strong>只用 \(\alpha_s(M_Z)\) 校準耦合；其餘若要預測別的能標，必須用獨立的重整化群方程演化，再與未用於校準的數據比較。若每個新數據點都重新調 \(g_s\)，才會變成套數據。</div>
+
+      <p class="small">資料來源：Particle Data Group, “Quantum Chromodynamics,” 2025 Review，第 9.25 式及圖 9.4。<a href="https://pdg.lbl.gov/2025/reviews/rpp2025-rev-qcd.pdf">官方 PDF</a>。同一 review 也明確給出 QCD 拉氏量、\(F_{\mu\nu}\)、\(\alpha_s=g_s^2/(4\pi)\) 以及耦合隨能標跑動的 RGE。</p>
+    </section>
+
+    <section id="lean">
+      <h2>六、Lean 新增了哪些可稽核內容？</h2>
+      <h3><code>QCDDynamics.lean</code></h3>
+      <table>
+        <thead><tr><th>宣告／定理</th><th>內容</th><th>帳目</th></tr></thead>
+        <tbody>
+          <tr><td><code>fieldStrengthG</code></td><td>顯式 \(g_s\) 的非阿貝爾場強</td><td><span class="tag input">動力定義</span></td></tr>
+          <tr><td><code>fieldStrengthG_one</code></td><td>證明舊場強正是 \(g_s=1\)</td><td><span class="tag proved">機器證明</span></td></tr>
+          <tr><td><code>fieldStrengthG_sub_naive</code></td><td>精確證明差為 \((g_s-1)[A_\mu,A_\nu]\)</td><td><span class="tag proved">機器證明</span></td></tr>
+          <tr><td><code>covariantDerivativeAdjoint</code></td><td>伴隨表示的 \(D_\mu\)</td><td><span class="tag input">動力定義</span></td></tr>
+          <tr><td><code>QuarkField</code></td><td>時空上的 \(4\times3\) 色—自旋場</td><td><span class="tag input">物理載體</span></td></tr>
+          <tr><td><code>diracResidual</code></td><td>\((i\gamma^\mu D_\mu-m)\psi\)</td><td><span class="tag input">方程定義</span></td></tr>
+          <tr><td><code>YangMillsEquation</code></td><td>\(D^\mu F_{\mu\nu}=J_\nu\)</td><td><span class="tag input">方程定義</span></td></tr>
+          <tr><td><code>ClassicalQCDProblem</code></td><td>耦合、質量、gamma、夸克色流、初值、邊界</td><td><span class="tag input">問題規格</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3><code>DimensionlessComparison.lean</code></h3>
+      <table>
+        <thead><tr><th>定理</th><th>真正證到的內容</th></tr></thead>
+        <tbody>
+          <tr><td><code>calibratedRHS_sub_naive</code></td><td>整體尺度與單位樸素流的精確代數差</td></tr>
+          <tr><td><code>recover_naiveRHS</code></td><td>\(\kappa\neq0\) 時可除回同一無因次方向場</td></tr>
+          <tr><td><code>gS_MZ_central_sq</code></td><td>精確執行 \(g_s^2=4\pi\alpha_s\)</td></tr>
+          <tr><td><code>gS_MZ_central_sq_gt_one</code></td><td>不用浮點近似，證明中央數據不等於隱藏的單位耦合</td></tr>
+          <tr><td><code>calibrated_fieldStrength_gap</code></td><td>把 PDG 中央耦合代入場強差式</td></tr>
+        </tbody>
+      </table>
+
+      <pre>lake build
+lake env lean CubeToSU3/Check.lean</pre>
+      <p class="small">中央 <code>Check.lean</code> 已加入上述定理的公理稽核項；根 <code>CubeToSU3.lean</code> 也已匯入兩個新模組。當前交付環境沒有 Lean 執行檔，所以本次只完成靜態檢查；使用者應在已成功建立 10.1／完整工程的同一 toolchain 上執行上列兩個命令。</p>
+    </section>
+
+    <section id="boundary">
+      <h2>七、距離「真物理」還差哪幾步？</h2>
+      <table class="wide">
+        <thead><tr><th>尚缺</th><th>為什麼重要</th><th>完成後才可做什麼</th></tr></thead>
+        <tbody>
+          <tr><td>局域規範變換與協變性定理</td><td>證明 \(A,\psi,F,D\psi\) 在 \(U(x)\) 下按正確方式變換</td><td>確認定義不是只在單一座標／規範下碰巧成立</td></tr>
+          <tr><td>Minkowski metric 與 Clifford 關係</td><td>固定 \(\gamma^\mu\)、指標升降與時間號誌</td><td>把 Euclidean 原型變成相對論場方程</td></tr>
+          <tr><td>作用量與變分推導</td><td>從一個 \(\mathcal L_{\rm QCD}\) 同時推出 Dirac 與 Yang–Mills 方程</td><td>證明聯立動力不是兩條手接方程</td></tr>
+          <tr><td>六味夸克與質量矩陣</td><td>單一 \(m\) 只是範例</td><td>接強子譜、衰變與味物理</td></tr>
+          <tr><td>重整化群</td><td>\(g_s=g_s(\mu)\)，不是常數表上一個永遠固定的數</td><td>由 \(M_Z\) 校準後預測其他能標</td></tr>
+          <tr><td>量子化、規範固定、ghost</td><td>實驗散射不是經典 PDE 的場值</td><td>算振幅、截面與量子修正</td></tr>
+          <tr><td>非微擾方法／格點</td><td>低能 QCD 強耦合且有禁閉</td><td>預測強子質量等真正低能量</td></tr>
+          <tr><td>獨立盲測輸出</td><td>防止用輸出反調全部輸入</td><td>使模型具可證偽性</td></tr>
+        </tbody>
+      </table>
+
+      <h3>最後的科學判決</h3>
+      <div class="verdict">
+        <p><strong>這次增加後，立方體模型已跨過「只有群代數」的門檻，成為可承載一個經典 QCD 候選問題的形式骨架；但還沒有跨過「完整量子 QCD」的門檻。</strong></p>
+        <p>最清楚的落差是：</p>
+        \[
+        \underbrace{\text{無因次結構}}_{\text{立方體／群代數}}
+        +\underbrace{\text{物理字典}}_{SU(3)\mapsto SU(3)_c}
+        +\underbrace{\text{動力律}}_{D_\mu,F_{\mu\nu},\mathcal L}
+        +\underbrace{\text{實驗輸入}}_{g_s,m_q,\mu}
+        +\underbrace{\text{態與邊界}}_{\psi_0,A_0,\partial\Omega}
+        \Longrightarrow \text{可求解的物理模型}.
+        \]
+        <p>其中只有第一塊由目前立方體核心內生；其餘必須逐項明列。接著用少數數據校準，拿未使用的數據做盲測，才是「與實驗互動」，而不是套型套數據。</p>
+      </div>
+    </section>
+  </article>
+
+  <footer>
+    本筆記配套於新增的 <code>QCDDynamics.lean</code> 與 <code>DimensionlessComparison.lean</code>。版本日期：2026-09-11。
+  </footer>
+</main>
+</body>
+</html>

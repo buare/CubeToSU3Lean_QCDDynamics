@@ -1,0 +1,122 @@
+﻿??[6027/6030] Replayed CubeToSU3.CompactSU3
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:424:0: 'CubeToSU3.compactMatrix_mem_su3' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:425:0: 'CubeToSU3.compactMatrix_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:426:0: 'CubeToSU3.compactMatrix_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:427:0: 'CubeToSU3.Coeff8.ofMatrix_toMatrix' depends on axioms: [propext]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:428:0: 'CubeToSU3.bracket_K12_K23' does not depend on any axioms
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:429:0: 'CubeToSU3.no_phi_is_lie_hom' does not depend on any axioms
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:430:0: 'CubeToSU3.Dg_squared' does not depend on any axioms
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:431:0: 'CubeToSU3.bracket_Dg_coefficients' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:432:0: 'CubeToSU3.bracket_Dg_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:433:0: 'CubeToSU3.adD_z12' depends on axioms: [propext, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:434:0: 'CubeToSU3.adD_z13' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:435:0: 'CubeToSU3.adD_z23' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3.lean:436:0: 'CubeToSU3.Dg_eq_image_of_core_D' does not depend on any axioms
+??[6028/6030] Replayed CubeToSU3.Weyl
+info: .\.\.\.\CubeToSU3\Weyl.lean:179:0: 'CubeToSU3.permMat_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\Weyl.lean:180:0: 'CubeToSU3.permMat_toMatrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\Weyl.lean:181:0: 'CubeToSU3.weights_permMat' does not depend on any axioms
+info: .\.\.\.\CubeToSU3\Weyl.lean:182:0: 'CubeToSU3.permMat_faithful' does not depend on any axioms
+info: .\.\.\.\CubeToSU3\Weyl.lean:183:0: 'CubeToSU3.signAct_neg_all' depends on axioms: [propext]
+info: .\.\.\.\CubeToSU3\Weyl.lean:184:0: 'CubeToSU3.signAct_four_distinct' does not depend on any axioms
+info: .\.\.\.\CubeToSU3\Weyl.lean:185:0: 'CubeToSU3.evenSigns_are_det_one' depends on axioms: [propext, Quot.sound]
+??[6029/6030] Replayed CubeToSU3.CompactSU3Real
+warning: .\.\.\.\CubeToSU3\CompactSU3Real.lean:180:58: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+note: this linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:350:0: 'CubeToSU3.Continuous.compactMatrixR_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:351:0: 'CubeToSU3.Continuous.compactMatrixR_coordinatesR' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:352:0: 'CubeToSU3.Continuous.coeffLinearEquivSu3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:353:0: 'CubeToSU3.Continuous.bracketR_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:354:0: 'CubeToSU3.Continuous.complexify_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:355:0: 'CubeToSU3.Continuous.bracket_Dreal_coefficients' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:356:0: 'CubeToSU3.Continuous.integer_adD_scalar_extension' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:357:0: 'CubeToSU3.Continuous.adDVec_z12R' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:358:0: 'CubeToSU3.Continuous.adDVec_z13R' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:359:0: 'CubeToSU3.Continuous.adDVec_z23R' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\CompactSU3Real.lean:360:0: 'CubeToSU3.Continuous.naiveODE_matrix_rhs' depends on axioms: [propext, Classical.choice, Quot.sound]
+??[6030/6030] Built CubeToSU3.WeylReal
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:189:2: try 'simp' instead of 'simpa'
+note: this linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:322:48: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+note: this linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:323:12: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+note: this linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:374:4: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:374:16: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:374:4: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:374:16: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:404:4: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:404:16: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:404:4: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:404:16: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:412:4: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:412:16: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:412:4: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:412:16: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:572:38: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:572:50: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:572:38: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:572:50: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:579:43: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:579:55: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:579:43: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:579:55: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:587:22: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:587:22: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:619:47: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:619:59: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:619:47: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:619:59: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:635:59: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:635:59: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:644:38: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+note: this linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:649:51: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+note: this linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:711:27: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:711:39: this tactic is never executed
+note: this linter can be disabled with `set_option linter.unreachableTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:711:27: 'ring_nf' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+warning: .\.\.\.\CubeToSU3\WeylReal.lean:711:39: 'simp' tactic does nothing
+note: this linter can be disabled with `set_option linter.unusedTactic false`
+info: .\.\.\.\CubeToSU3\WeylReal.lean:721:0: 'CubeToSU3.Perm3.equivS3' depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:722:0: 'CubeToSU3.cubeSym_card' depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:723:0: 'CubeToSU3.cubeAct_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:724:0: 'CubeToSU3.cube_kernel_iff' depends on axioms: [propext, Lean.ofReduceBool, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:725:0: 'CubeToSU3.signature_complete' depends on axioms: [propext, Lean.ofReduceBool, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:726:0: 'CubeToSU3.actionImage_card' depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:727:0: 'CubeToSU3.Continuous.cubeActR_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:728:0: 'CubeToSU3.Continuous.cubeActR_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:729:0: 'CubeToSU3.Continuous.cubeActSu3LinearEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: .\.\.\.\CubeToSU3\WeylReal.lean:730:0: 'CubeToSU3.Continuous.complexify_cubeAct' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully.

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>立方體到物理模型:一條直線</title>
+<style>
+:root{
+  --indigo:#16202e; --deep:#101825; --panel:#1e2b3c;
+  --paper:#ece7db; --dim:#9aa7b6; --line:#33455c;
+  --ok:#5e9a93; --input:#d9a441; --todo:#7d8ea0; --shut:#d2503a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--indigo); color:var(--paper);
+  font-family:"Songti TC","Noto Serif TC","Source Han Serif TC",
+              "PingFang TC","Microsoft JhengHei",Georgia,serif;
+  line-height:1.85;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:54rem;margin:0 auto;padding:0 1.5rem}
+header{padding:4rem 0 1rem}
+h1{font-size:clamp(1.9rem,5vw,2.9rem);font-weight:600;letter-spacing:.12em;
+   line-height:1.3;margin:0 0 .7rem}
+.lede{color:var(--dim);max-width:38rem}
+p{max-width:42rem;margin:0 0 1rem}
+code,.mono{font-family:"SFMono-Regular",Menlo,Consolas,monospace;font-size:.9em}
+
+.legend{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.8rem 0 0}
+.legend button{
+  font-family:inherit;font-size:.88rem;letter-spacing:.05em;color:var(--paper);
+  background:transparent;border:1px solid var(--line);border-radius:2px;
+  padding:.35rem .85rem;cursor:pointer;transition:border-color .15s,background .15s;
+}
+.legend button:hover{border-color:var(--dim)}
+.legend button[aria-pressed="true"]{background:var(--panel);border-color:var(--dim)}
+.legend button:focus-visible{outline:2px solid var(--input);outline-offset:2px}
+
+.chain{margin:2.5rem 0 0;border-left:1px solid var(--line);padding-left:0}
+.link{position:relative;padding:1.1rem 0 1.1rem 2rem;border-bottom:1px solid var(--line)}
+.link::before{
+  content:"";position:absolute;left:-5px;top:1.75rem;
+  width:9px;height:9px;border-radius:50%;background:var(--todo);
+}
+.link[data-s="ok"]::before{background:var(--ok)}
+.link[data-s="input"]::before{background:var(--input)}
+.link[data-s="shut"]::before{background:var(--shut)}
+.link.hide{display:none}
+.n{font-size:.78rem;color:var(--dim);letter-spacing:.14em}
+.t{font-size:1.12rem;font-weight:600;letter-spacing:.04em;margin:.15rem 0 .35rem}
+.d{color:var(--dim);font-size:.97rem;margin:0 0 .45rem;max-width:40rem}
+.meta{font-size:.82rem;letter-spacing:.05em}
+.badge{display:inline-block;padding:.05rem .5rem;border:1px solid;border-radius:2px;margin-right:.6rem}
+[data-s="ok"] .badge{color:var(--ok);border-color:var(--ok)}
+[data-s="input"] .badge{color:var(--input);border-color:var(--input)}
+[data-s="todo"] .badge{color:var(--todo);border-color:var(--todo)}
+[data-s="shut"] .badge{color:var(--shut);border-color:var(--shut)}
+.src{color:var(--dim)}
+section{padding:3rem 0 0;border-top:1px solid var(--line);margin-top:3rem}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:.08em;margin:0 0 .9rem}
+footer{padding:2.5rem 0 5rem;color:var(--dim);font-size:.9rem}
+.note{border-left:2px solid var(--shut);padding:.15rem 0 .15rem 1rem;color:var(--dim);
+      max-width:40rem;margin:1.3rem 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>立方體到物理模型<br>一條直線</h1>
+  <p class="lede">原筆記把材料分成十二節。這裡改成單一條鏈,每一環標明它現在的身分:
+  機器驗證過的、外部插入的、還沒形式化的、以及已經被否定定理封閉的。
+  全專案的公理足跡只有 <span class="mono">propext / Classical.choice / Quot.sound</span>,
+  沒有 <span class="mono">sorry</span>、沒有 <span class="mono">native_decide</span>、沒有自訂公理進入數學主線。</p>
+  <div class="legend">
+    <button data-f="all" aria-pressed="true">全部</button>
+    <button data-f="ok" aria-pressed="false">機器驗證</button>
+    <button data-f="input" aria-pressed="false">物理輸入</button>
+    <button data-f="todo" aria-pressed="false">未形式化</button>
+    <button data-f="shut" aria-pressed="false">已封閉</button>
+  </div>
+</header>
+
+<div class="chain" id="chain">
+
+<div class="link" data-s="ok"><div class="n">01 · 幾何內生</div>
+  <div class="t">八頂點與十二稜</div>
+  <div class="d">頂點集 <span class="mono">Q₃ = {0,1}³</span>,只差一爻者相鄰。八個離散狀態,三種翻轉方向。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">Cube.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">02 · 幾何內生</div>
+  <div class="t">乾坤軸投影出正六邊形</div>
+  <div class="d">沿乾(111)–坤(000)體對角線投影:兩端落在原點,其餘六點等距、相鄰 60°。
+  爻陽數沿環交替,兩個三角形即 <span class="mono">3</span> 與 <span class="mono">3̄</span> 的圖像。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">QianKunAxis.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">03 · 幾何內生</div>
+  <div class="t">D 是繞軸旋轉的生成元</div>
+  <div class="d"><span class="mono">D v = v × (1,1,1)</span>。座標循環置換 <span class="mono">P</span> 是繞乾坤軸的 120° 旋轉,
+  <span class="mono">D = P − P²</span> 是它的無窮小形式。投影平面 <span class="mono">x+y+z=0</span> 就是根平面。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">Core.lean · QianKunAxis.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">04 · 幾何內生</div>
+  <div class="t">三維家族空間分解為 1 + 2</div>
+  <div class="d"><span class="mono">ker D</span>(體對角線,維一)與 <span class="mono">im D</span>(根平面,維二)直和,交集平凡。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">Core.lean</span></div></div>
+
+<div class="link" data-s="input"><div class="n">05 · 物理輸入</div>
+  <div class="t">路徑代數公理 A1–A4</div>
+  <div class="d">路徑可實線性疊加、可接則相乘、以對易子運算、附加共同複相位。
+  這四條把離散道路變成矩陣代數,不是立方體本身給的。</div>
+  <div class="meta"><span class="badge">外部插入</span><span class="src">原筆記 §2 帳本</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">06 · 樸素解</div>
+  <div class="t">ℝ⁸ ≅ su(3)</div>
+  <div class="d">六條非對角路徑加兩條無跡對角方向,在對易子下封閉;實數化後與 <span class="mono">su(3)</span> 線性同構,維數八。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">CompactSU3Real.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">07 · 樸素解</div>
+  <div class="t">exp : su(3) → SU(3) 是滿射</div>
+  <div class="d">無前提。需要三階么正矩陣的譜定理,而 mathlib 4.16 沒有——Schur 三角化、正規矩陣譜定理、同時對角化,三者皆無。
+  經 Cayley 變換從 Hermitian 譜定理自建,五階段全部通過,<span class="mono">UnitarySpectralTheorem3</span> 的前提已消除。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">SU3SpectralStage1–5.lean</span></div></div>
+
+<div class="link" data-s="input"><div class="n">08 · 物理輸入</div>
+  <div class="t">字典三條:家族、手徵、中心相位</div>
+  <div class="d">三個座標方向讀作三個家族(P1);<span class="mono">Γ□ = ±1</span> 選 <span class="mono">3_L</span> 或 <span class="mono">3̄_L</span>(P2);
+  兩中心的相對相位保留為 <span class="mono">U(1)_X</span>(P3,原筆記的候選公理 A5)。</div>
+  <div class="meta"><span class="badge">外部插入</span><span class="src">AnomalyLedger.lean 顯式 axiom</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">09 · 樸素解</div>
+  <div class="t">X_Q 的譜被逼成 {−1/3, −1/3, 2/3}</div>
+  <div class="d">寫成 <span class="mono">X_Q = aP₁ + bP₂</span>,三代無跡給 <span class="mono">a + 2b = 0</span>,
+  單位間距給 <span class="mono">a − b = 1</span>。唯一解 <span class="mono">a = 2/3, b = −1/3</span>,不是逐代手填。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">AnomalyLedger.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">10 · 樸素解</div>
+  <div class="t">只有「兩代加一代」能消反常</div>
+  <div class="d">三次 <span class="mono">SU(3)_L</span> 反常給 <span class="mono">6n_Q + 2n_L = 12</span>,
+  在 <span class="mono">0 ≤ n_Q, n_L ≤ 3</span> 內唯一解是 <span class="mono">(2,0)</span> 與其共軛 <span class="mono">(1,3)</span>。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">AnomalyLedger.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">11 · 檢驗</div>
+  <div class="t">六項反常全部歸零</div>
+  <div class="d">十五個左手 Weyl 場,右手夸克取共軛。
+  <span class="mono">[SU(3)_L]³</span>、<span class="mono">[SU(3)_c]³</span>、<span class="mono">[SU(3)_L]²U(1)_X</span>、
+  <span class="mono">[SU(3)_c]²U(1)_X</span>、<span class="mono">grav²U(1)_X</span>、<span class="mono">[U(1)_X]³</span> 逐項為零。
+  立方 <span class="mono">U(1)_X</span> 逐代是 <span class="mono">+6, +6, −12</span>——抵消發生在家族之間,不在家族內部。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">AnomalyLedger.lean</span></div></div>
+
+<div class="link" data-s="todo"><div class="n">12 · 比例</div>
+  <div class="t">g′/g = 1/√3 與 sin²θ_W = 1/4</div>
+  <div class="d">純 <span class="mono">SU(3)</span> 正規化下的耦合比。這是<b>高能邊界條件</b>,不是可測量;
+  實驗值是在 <span class="mono">M_Z</span> 標度量的,兩者之間隔著整條跑動。可形式化,但措辭必須標清標度。</div>
+  <div class="meta"><span class="badge">未形式化</span><span class="src">原筆記 §7、§11</span></div></div>
+
+<div class="link" data-s="todo"><div class="n">13 · 物理解</div>
+  <div class="t">破缺尺度 f ≈ 3.626 TeV</div>
+  <div class="d">由樸素比例加實測耦合加一圈 RGE 得出,受閾值與高階修正影響。
+  對應的 <span class="mono">M_{V,Y}</span> 在 1.146 至 1.985 TeV 之間,最樸素的那個版本已受 LHC 重詮釋壓力。</div>
+  <div class="meta"><span class="badge">未形式化</span><span class="src">原筆記 §7、§8</span></div></div>
+
+<div class="link" data-s="shut"><div class="n">14 · 降級</div>
+  <div class="t">f/v = 6√6 不再是候選</div>
+  <div class="d">兩條獨立結果指向同一結論。閉走訪 no-go 證明任何由譜不變量拼出的常數都是 3 的偽裝;
+  而 look-elsewhere 檢定顯示,由 <span class="mono">{1,2,3,√3}</span> 組出的公式空間在 <span class="mono">x ≈ 15</span> 附近
+  每個 ±1% 窗口有約六個候選,真實物理比值的命中率 <span class="mono">p = 0.93</span>,連隨機水準都沒達到。</div>
+  <div class="meta"><span class="badge">已封閉</span><span class="src">ClosedWalks.lean · 統計檢定</span></div></div>
+
+<div class="link" data-s="shut"><div class="n">15 · 封閉</div>
+  <div class="t">手徵性無法從立方體導出</div>
+  <div class="d">躍遷算符的手徵索引恆為零,而且<b>不依賴邊上的任何權重或相位</b>——是整個參數空間的判決,
+  不是一次失敗的嘗試。所以第 08 環的 <span class="mono">Γ□</span> 規則是必須外加,沒有替代方案。</div>
+  <div class="meta"><span class="badge">已封閉</span><span class="src">Cube.lean · cube_index_zero</span></div></div>
+
+<div class="link" data-s="shut"><div class="n">16 · 封閉</div>
+  <div class="t">未破缺的立方體對稱給出三代簡併</div>
+  <div class="d">立方體旋轉群是 24 階的 <span class="mono">S₄</span>。若三代帶其三維不可約表示,
+  由 Schur 引理,不變的質量矩陣只能是純量,三代等質量。而實際上 <span class="mono">m_τ/m_e ≈ 3477</span>。
+  任何味道模型都必須破缺它,而預言就來自破缺方式,不來自立方體。</div>
+  <div class="meta"><span class="badge">已封閉</span><span class="src">CubeFlavourNoGo.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">17 · 幾何內生</div>
+  <div class="t">六個頂點就是六個根</div>
+  <div class="d">第 02 環只證了形狀。這一環證的是結構:
+  <span class="mono">D</span> 把六個非軸頂點雙射到 <span class="mono">A₂</span> 的六個根 <span class="mono">e_i − e_j</span>,而且
+  <span class="mono">[diag h, E] = ⟨D·v, h⟩ · E</span>——立方體交出的向量<b>就是</b>伴隨作用的本徵值。
+  字典是被逼出來的,不是選的。軸穩定子作用如同 Weyl 群,差一個置換符號。
+  順帶更正:正交投影給的是<b>權</b>,<span class="mono">D</span> 給的才是<b>根</b>,兩者差 30°。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">RootMatch.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">18 · 規範結構</div>
+  <div class="t">Ad 提得出來</div>
+  <div class="d"><span class="mono">Ad g X = g X g†</span> 是李代數自同構,而規範協變性就是「把 <span class="mono">Ad</span> 提出去」。
+  常數 <span class="mono">g</span> 的情形已證:<span class="mono">F(Ad g ∘ A) = Ad g (F A)</span>,精確、不丟任何項。
+  關鍵不是 <span class="mono">Ad</span> 線性,是它<b>保持括號</b>——任意線性映射會讓協變性當場垮掉。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">GaugeTheory.lean · GaugeGlobal.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">19 · 曲率</div>
+  <div class="t">繞一個面走回來,被轉了</div>
+  <div class="d">把立方體當格點:每條稜掛一個群元素,繞一面的和樂是四個元素的乘積,規範變換只把它在基點共軛,所以跡是可觀測量。
+  取繞乾坤軸的 120° 旋轉與一個號誌翻轉——<b>兩個都是立方體自己的對稱</b>——和樂是它們的交換子
+  <span class="mono">diag(−1,−1,1)</span>,跡為 <span class="mono">−1</span> 而非 <span class="mono">3</span>。
+  這個聯絡在<b>任何</b>規範下都不是純規範:曲率消不掉。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">LatticeGauge.lean · LatticeNonFlat.lean</span></div></div>
+
+<div class="link" data-s="ok"><div class="n">20 · 數值</div>
+  <div class="t">S = 32</div>
+  <div class="d">Wilson 作用量 <span class="mono">S = Σ (3 − Re tr W)</span>,那個 <span class="mono">3</span> 是 <span class="mono">tr 1</span>,
+  所以和樂平凡時貢獻為零。規範不變由第 19 環一步推出,平坦聯絡的作用量為零。
+  對上一環那個聯絡:<span class="mono">(0,1)</span> 面每個頂點貢獻 <span class="mono">3 − (−1) = 4</span>,另外兩面平坦,
+  八個頂點合計 <span class="mono">32</span>。
+  <b>這是整個專案第一個非零的規範不變數值</b>——在此之前不是恆等式、就是歸零的 no-go、就是矩陣。</div>
+  <div class="meta"><span class="badge">機器驗證</span><span class="src">WilsonAction.lean</span></div></div>
+
+<div class="link" data-s="todo"><div class="n">21 · 缺口</div>
+  <div class="t">局部規範協變性</div>
+  <div class="d">齊次部分(第 18 環)已證。還缺的是 <span class="mono">g</span> 隨位置變時那兩塊殘渣
+  <span class="mono">(∂g)Ag†</span> 與 <span class="mono">gA(∂g†)</span> 被 Maurer–Cartan 項吃掉。
+  <span class="mono">θ = u ∂u†</span> 的反厄米性已證,無跡性以顯式假設進場——它需要行列式的導數,而 mathlib 沒有。</div>
+  <div class="meta"><span class="badge">未形式化</span><span class="src">GaugeLocal.lean</span></div></div>
+
+</div>
+
+<section>
+  <h2>這條鏈該怎麼讀</h2>
+  <p>綠色的環是機器驗證過的,公理足跡只有
+  <span class="mono">propext / Classical.choice / Quot.sound</span>。黃色的環是外部插入的假設,
+  它們在 Lean 裡被宣告成顯式 <span class="mono">axiom</span>,而且所有綠色結論<b>一條都沒有用到它們</b>——
+  這一點可以用 <span class="mono">#print axioms</span> 當場查核。</p>
+  <p>灰色的環是還沒形式化的,紅色的環是已經被否定定理關上的門。
+  紅色不代表失敗,代表後來的人不必再撞一次。</p>
+  <div class="note">整條鏈證明的是這個候選模型的<b>自洽性</b>,不是它的<b>導出性</b>。
+  反常歸零說明它在量子層面不矛盾;它沒有說立方體要求你選這組場內容。
+  第 08 環的三條字典公理就是這個差距的所在。</div>
+</section>
+
+<footer>
+  <p>本頁對應 CubeToSU3 專案。綠色環的 Lean 檔案名列在每一環下方,可直接查核。
+  這裡沒有任何關於自然界的主張;它是一份候選構造的完整稽核,包含它做到的與做不到的。</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".legend button"));
+  var links = Array.prototype.slice.call(document.querySelectorAll(".link"));
+  function apply(f){
+    links.forEach(function(el){
+      el.classList.toggle("hide", f !== "all" && el.getAttribute("data-s") !== f);
+    });
+    buttons.forEach(function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-f") === f ? "true" : "false");
+    });
+  }
+  buttons.forEach(function(b){
+    b.addEventListener("click", function(){ apply(b.getAttribute("data-f")); });
+  });
+  apply("all");
+})();
+</script>
+</body>
+</html>
