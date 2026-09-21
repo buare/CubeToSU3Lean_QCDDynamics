@@ -128,6 +128,7 @@ Every main theorem depends only on Lean's standard axioms
 If you use this work, please cite it via the "Cite this repository" button
 (generated from `CITATION.cff`) or the Zenodo DOI:
 <!-- TODO: add DOI badge after the first Zenodo release -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22878862.svg)](https://doi.org/10.5281/zenodo.22878862)
 
 ## License
 
