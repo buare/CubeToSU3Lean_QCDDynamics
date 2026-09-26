@@ -25,6 +25,7 @@ import CubeToSU3.CG.HuckelRing
 import CubeToSU3.QianKunAxis
 import CubeToSU3.RootMatch
 import CubeToSU3.QianKunStabilizer
+import CubeToSU3.ZeroSumPlane
 /-!
 # CubeToSU3 complete import root
 
