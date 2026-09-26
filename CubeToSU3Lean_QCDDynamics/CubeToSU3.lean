@@ -22,6 +22,9 @@ import CubeToSU3.CG.Baryon
 import CubeToSU3.CG.BCJ
 import CubeToSU3.CG.SpringRing
 import CubeToSU3.CG.HuckelRing
+import CubeToSU3.QianKunAxis
+import CubeToSU3.RootMatch
+import CubeToSU3.QianKunStabilizer
 /-!
 # CubeToSU3 complete import root
 

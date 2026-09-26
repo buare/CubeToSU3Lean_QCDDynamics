@@ -170,7 +170,17 @@ theorem evenSigns_card : evenSigns.length = 4 := by decide
       the S3 factor  (order 6) acts faithfully   -> 6 distinct automorphisms
       the (Z2)^3     (order 8) collapses by 2    -> 4 distinct automorphisms
     So exactly 24 of the 48 cube automorphisms survive as distinct
-    automorphisms of su(3). -/
+    automorphisms of su(3).
+
+    Caveat: this action does not follow the cube's vertices.  `signAct`
+    fixes every root space (it only multiplies `E_ij` by `±1`), whereas the
+    corresponding yao flip on `Q₃` moves all six non-axis vertices.  So these
+    24 are automorphisms of su(3), not symmetries compatible with the
+    vertex-to-root labelling `genOf` of `RootMatch.lean`.  The compatible ones
+    are exactly the 12 that fix the 乾-坤 axis, proved in
+    `QianKunStabilizer.lean`; there 錯卦 (flip all three) is forced to be the
+    Chevalley involution `X ↦ -Xᵀ` (charge conjugation), not the trivial map
+    of `signAct_flip_all_trivial`. -/
 
 theorem cube_automorphism_survival :
     Perm3.all.length = 6 ∧ allSigns.length = 8 ∧ evenSigns.length = 4 := by
