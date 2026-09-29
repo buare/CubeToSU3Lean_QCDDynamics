@@ -65,7 +65,7 @@ main line yet**:
 |---|---|---|
 | Naive dynamics | dv/dt = Dv (ω = √3); one-loop running; group factors in β₀ = 11 − 2n_f/3 | computed, to be formalized |
 | Algebra embedding | su(2)_L ⊕ u(1) ⊂ su(3)_L; Q = T₃ + βT₈ + X | computed, to be formalized |
-| Chiral content | 6n_Q + 2n_L = 12; 15 Weyl fields per generation, all six anomalies vanish | computed, to be formalized |
+| Chiral content | 6n_Q + 2n_L = 12 (`family_split_unique`); 15 left-handed multiplets in the 331 candidate (2 + 1 quark families, 3 lepton triplets), all six anomalies vanish (`anomalies_all_vanish`) | stated in `CubeToSU3/AnomalyLedger.lean` (`decide`, no axioms); not yet compiled in CI, module not yet in the root import |
 | Symmetry breaking | SU(2) × U(1) → U(1)_EM from a triplet VEV | not yet done |
 | 331 mass scales | f ≈ 3.626 TeV; M ≈ 1.985 / 1.146 TeV | under review |
 | Yukawa / CKM | continuous parameters | external input |
