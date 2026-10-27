@@ -62,6 +62,18 @@ Important reading rule: the surjectivity theorem below has
 #print axioms CubeToSU3.YouNian.dyCycle_is_hamiltonian
 #print axioms CubeToSU3.YouNian.D_not_group_hom
 
+-- 玄空大卦 and the 先天 circle (DaguaCube, Lean core only)
+#print axioms CubeToSU3.Dagua.pub_matches
+#print axioms CubeToSU3.Dagua.T_involution
+#print axioms CubeToSU3.Dagua.he_klein
+#print axioms CubeToSU3.Dagua.one_flip_adjacent
+#print axioms CubeToSU3.Dagua.circ_opposite
+#print axioms CubeToSU3.Dagua.circ_steps
+#print axioms CubeToSU3.Dagua.mv_linear
+#print axioms CubeToSU3.Dagua.K_injective
+#print axioms CubeToSU3.Dagua.parity_is_w1
+#print axioms CubeToSU3.Dagua.xor_layers
+
 -- Replacement test
 #print axioms CubeToSU3.Hexagon.hex_S_anticommutes
 #print axioms CubeToSU3.Hexagon.hex_sectors_balanced

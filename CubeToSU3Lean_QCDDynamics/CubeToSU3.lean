@@ -22,6 +22,7 @@ import CubeToSU3.CG.Baryon
 import CubeToSU3.CG.BCJ
 import CubeToSU3.CG.SpringRing
 import CubeToSU3.CG.HuckelRing
+import CubeToSU3.DaguaCube
 /-!
 # CubeToSU3 complete import root
 
